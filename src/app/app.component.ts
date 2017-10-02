@@ -10,25 +10,25 @@ import { UserService } from '../services/user.service';
 })
 export class AppComponent {
 
-	public users;
 	public boxs;
+  public turno;
 
-  constructor(private boxService: BoxService, private userService: UserService){
+  constructor(private boxService: BoxService){
   	this.getBoxsAll();
-  	this.getUsersAll();
   }
 
   private getBoxsAll(){
   	this.boxService.getAll()
   	.subscribe(data => {
-  		console.log(data.json());
+  		this.boxs = data.json().tablero;
+      this.turno = data.json().turno;
+      console.log(this.boxs);
   	});
   }
 
-  private getUsersAll(){
-  	this.userService.getAll()
-  	.subscribe(data => {
-  		console.log(data.json());
-  	});
+  private restartGame(){
+    this.boxService.startGame()
+    .subscribe(data => {
+    });
   }
 }

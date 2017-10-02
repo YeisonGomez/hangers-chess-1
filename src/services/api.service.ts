@@ -1,10 +1,10 @@
 import { Injectable } from "@angular/core";
-import { Http } from '@angular/http';
+import { Http, Headers } from '@angular/http';
 
 @Injectable()
 export class ApiService {
 
-	public api_url: string = 'http://192.168.100.7:3310';
+	public api_url: string = 'http://localhost:3310';
 
 	private timeout: number = 5000;
 
@@ -15,7 +15,10 @@ export class ApiService {
   	}
 
   	public POST(url: string, params: any){
-  		return this.http.post(this.api_url + url, params);
+      let headers = new Headers();
+      headers.append('Content-Type', 'application/x-www-form-urlencoded');
+
+  		return this.http.post(this.api_url + url, params, { headers: headers } );
   	}
 
   	private handleError(error) {
