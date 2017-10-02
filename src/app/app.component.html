@@ -1,1 +1,32 @@
 <button (click)="restartGame()">Empezar el juego</button>
+<button (click)="updateTable()">Actualizar el juego</button>
+
+<table style="width:50%">
+  <tr>
+  	<th></th>
+    <th>1</th>
+    <th>2</th> 
+    <th>3</th>
+    <th>4</th>
+    <th>5</th>
+    <th>6</th>
+    <th>7</th>
+    <th>8</th>
+    <th>9</th>
+    <th>10</th>
+  </tr>
+
+  <tr *ngFor="let row of boxs; let i = index">
+  	<td>{{letters[i]}}</td>
+    <td *ngFor="let column of row">{{column.usuario_id}}</td>
+  </tr>
+</table>
+
+<div *ngFor="let user of users">
+	<span>Id: {{user.usuario_id}}</span> |
+	<span>Nombre: {{user.usuario_nombres}}</span> |
+	<span>Color: {{user.usuario_color}}</span> |
+	<span>Vidas: {{user.usuario_vida}}</span> |
+	<span>Muertes: {{user.muertes}}</span> |
+
+</div>
