@@ -6,11 +6,9 @@ import { FormsModule } from '@angular/forms'
 import { AppComponent } from './app.component';
 
 import {  Box } from '../providers/box.provider';
-import {  User } from '../providers/user.provider';
 
 import { ApiService } from '../services/api.service';
 import { BoxService } from '../services/box.service';
-import { UserService } from '../services/user.service';
 
 @NgModule({
   declarations: [
@@ -23,10 +21,8 @@ import { UserService } from '../services/user.service';
   ],
   providers: [
   	Box,
-  	User,
     ApiService,
-    BoxService,
-    UserService
+    BoxService
   ],
   bootstrap: [AppComponent]
 })

@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 
 import { BoxService } from '../services/box.service';
-import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-root',

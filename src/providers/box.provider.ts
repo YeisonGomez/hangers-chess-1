@@ -12,8 +12,4 @@ export class Box {
 		this.nombre=nombre;
 		this.fk_usuario=fk_usuario;
 	}
-
-	public testDB(){
-
-	}
 }
