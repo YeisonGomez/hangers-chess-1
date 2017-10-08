@@ -6,7 +6,7 @@ export class ApiService {
 
 	//public api_url: string = 'http://localhost:3310';
   //public api_url: string = 'https://9cd973fd.ngrok.io';
-  public api_url: string = 'https://104.236.211.90:8080';
+  public api_url: string = 'http://104.236.211.90:8080';
 
 	private timeout: number = 5000;
 
