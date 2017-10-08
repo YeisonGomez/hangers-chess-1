@@ -58,9 +58,19 @@ export class AppComponent {
           }
         }
         if(user_exist == -1){
-          this.boxs[i][l] = { casilla: this.boxs[i].casilla };
+          delete this.boxs[i][l].muertes;
+          delete this.boxs[i][l].usuario_color;
+          delete this.boxs[i][l].usuario_estado;
+          delete this.boxs[i][l].usuario_id;
+          delete this.boxs[i][l].usuario_nombres;
+          delete this.boxs[i][l].usuario_vida;
         } else {
-          this.boxs[i][l] = users[user_exist];
+          this.boxs[i][l].muertes = users[user_exist].muertes;
+          this.boxs[i][l].usuario_color = users[user_exist].usuario_color;
+          this.boxs[i][l].usuario_estado = users[user_exist].usuario_estado;
+          this.boxs[i][l].usuario_id = users[user_exist].usuario_id;
+          this.boxs[i][l].usuario_nombres = users[user_exist].usuario_nombres;
+          this.boxs[i][l].usuario_vida = users[user_exist].usuario_vida;
         }
       }
     }
