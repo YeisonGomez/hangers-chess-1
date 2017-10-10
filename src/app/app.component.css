@@ -1,4 +1,95 @@
-table, th, td {
+table,
+th,
+td {
+    /*border: 1px solid black;
+    border-collapse: collapse;*/
+    text-align: center;
+    table-layout: fixed;
+    word-wrap: break-word;
+}
+
+.table-game tr td:first-child,
+.table-game th {
+    background: whitesmoke!important;
+    opacity: 0.5;
+    width: 1.5em;
+    height: 1.5em;
+}
+
+.table-game td {
+    /* background-image: url('../assets/img/miniskull.png'); */
+    background-repeat: no-repeat;
+}
+
+.table-game tr:nth-child(odd) td:nth-child(even),
+.table-game tr:nth-child(even) td:nth-child(odd) {
+    /*background: #6F5B45;*/
+    background: rgba(0, 0, 0, 0.8);
+}
+
+.table-game tr:nth-child(2n) td:nth-child(2n),
+.table-game tr:nth-child(odd) td:nth-child(odd) {
+    /*background: #ebb730;*/
+    background: rgba(255, 255, 255, 0.8);
+}
+
+
+/*Tablero Juego*/
+
+.table-game {
+    display: inline-block;
+    box-sizing: border-box;
+    margin: auto 5em;
+}
+
+.table-game td,
+th {
+    width: 3em;
+    height: 3em;
+}
+
+
+/*Sección Player*/
+
+.section-player {
+    width: 30%;
+    display: inline-block;
+    vertical-align: top;
+    text-align: center;
+    margin: auto 3em;
+}
+
+.btn-game {
+    margin: 1em auto 2em;
+}
+
+.btn-game button {
+    padding: 1em;
+}
+
+.table-player {
+    width: 100%;
+    vertical-align: middle;
+    background: rgba(255, 255, 255, 0.5)
+}
+
+.table-player,
+.table-player th,
+.table-player td {
     border: 1px solid black;
     border-collapse: collapse;
+}
+
+.table-player tbody {
+    display: table;
+    width: 100%;
+}
+
+.table-player tr {
+    display: table-row;
+    vertical-align: middle;
+}
+
+.table-player th:nth-child(2) {
+    width: 7em;
 }
