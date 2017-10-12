@@ -1,50 +1,59 @@
-<div class="table-game">
-    <table>
-        <tr>
-            <th></th>
-            <th>1</th>
-            <th>2</th>
-            <th>3</th>
-            <th>4</th>
-            <th>5</th>
-            <th>6</th>
-            <th>7</th>
-            <th>8</th>
-            <th>9</th>
-            <th>10</th>
-        </tr>
-        <tr *ngFor="let row of boxs; let i = index">
-            <td>{{letters[i]}}</td>
-            <!--<td *ngFor="let column of row">{{column.usuario_id}}</td>-->
-            <td *ngFor="let column of row">
-            	<span style="color: red">{{column.usuario_id}}</span>
-                <img *ngIf="column.usuario_id" src="{{(column.usuario_color == 'white')? '../assets/img/white.png' : '../assets/img/black.png'}}" alt="" style="width: 3em">
-            </td>
-        </tr>
-    </table>
-</div>
 
-<section class="section-player">
-    <table class="table-player">
-        <tr>
-            <th>Id</th>
-            <th>Nombre</th>
-            <th>Color</th>
-            <th>Vida</th>
-            <th>Muertes</th>
-        </tr>
-
-        <tr *ngFor="let user of users">
-            <td>{{user.usuario_id}}</td>
-            <td>{{user.usuario_nombres}}</td>
-            <td>{{user.usuario_color}}</td>
-            <td>{{user.usuario_vida}}</td>
-            <td>{{user.muertes}}</td>
-        </tr>
-    </table>
-</section>
-
-<div class="btn-game">
+<section class="gameview">
+    <div class="btn-game">
         <button (click)="startGame()">Empezar el juego</button>
         <button (click)="updateTable()">Actualizar el juego</button>
     </div>
+    <div class="table-game">
+        <table>
+            <tr>
+                <th></th>
+                <th>1</th>
+                <th>2</th>
+                <th>3</th>
+                <th>4</th>
+                <th>5</th>
+                <th>6</th>
+                <th>7</th>
+                <th>8</th>
+                <th>9</th>
+                <th>10</th>
+            </tr>
+            <tr *ngFor="let row of boxs; let i = index">
+                <td>{{letters[i]}}</td>
+                <!--<td *ngFor="let column of row">{{column.usuario_id}}</td>-->
+                <td *ngFor="let column of row" >
+                    <span style="color: red">{{column.usuario_id}}</span>
+                    <img *ngIf="column.usuario_id" src="../assets/img/avatars/{{column.usuario_id}}.png" alt="" style="width: 3em">
+                </td>
+            </tr>
+        </table>
+    </div>
+    <section class="section-player">
+        /
+        <!--<table class="table-player">
+            <tr>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Color</th>
+                <th>Vida</th>
+                <th>Muertes</th>
+            </tr>
+
+            <tr *ngFor="let user of users">
+                <td>{{user.usuario_id}}</td>
+                <td>{{user.usuario_nombres}}</td>
+                <td>{{user.usuario_color}}</td>
+                <td>{{user.usuario_vida}}</td>
+                <td>{{user.muertes}}</td>
+            </tr>
+        </table>-->
+    </section>
+</section>
+
+<div class="splash" [ngClass]="{'slide-top': initGameCls}">
+    <div class="door">
+        <!-- <img class="door " src="./assets/img/splash.jpg " alt=" ">-->
+        <button class="pass " (click)="startGame() "></button>
+    </div>
+</div>

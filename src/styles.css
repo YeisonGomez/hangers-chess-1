@@ -26,4 +26,7 @@ header h1 {
 
 body {
     background-image: url("https://cdn.wallpapersafari.com/29/49/PjQODh.jpg");
+    /*  background-image: url("https://wallpaperscraft.com/image/call_of_duty_square_houses_tanks_fire_battle_19754_3840x2160.jpg");
+    background-size: cover;*/
+    margin: 0;
 }
