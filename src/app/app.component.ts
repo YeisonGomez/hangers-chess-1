@@ -17,24 +17,34 @@ export class AppComponent {
   constructor(private boxService: BoxService){
     this.letters = this.boxService.letters;
     this.boxs = this.boxService.getTable(10);
-  	this.getBoxsAll();
+  	this.getBoxsAll(true);
   }
 
-  private getBoxsAll(){
+  private getBoxsAll(first: boolean){
   	this.boxService.getAll()
   	.subscribe(data => {
       this.users = data.json().tablero;
   		this.boxs = this.boxService.addingUsersToTable(this.users, this.boxs);
       this.turno = data.json().turno;
+      if(!first){
+        let interval = setInterval(() => {
+          console.log(this.turno);
+        if(this.turno >= 0){
+          this.updateTable();
+          } else {
+            clearInterval(interval);
+          }
+        }, 3000);
+      }
       console.log(this.boxs);
   	});
   }
 
-  private restartGame(){
+  private startGame(){
     this.boxService.startGame()
     .subscribe(data => {
       this.boxs = this.boxService.getTable(10);
-      this.getBoxsAll();
+      this.getBoxsAll(false);
     });
   }
 

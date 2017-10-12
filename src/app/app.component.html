@@ -17,16 +17,14 @@
             <td>{{letters[i]}}</td>
             <!--<td *ngFor="let column of row">{{column.usuario_id}}</td>-->
             <td *ngFor="let column of row">
-                <img src="../assets/img/white.png" alt="" style="width: 3em">
+            	<span style="color: red">{{column.usuario_id}}</span>
+                <img *ngIf="column.usuario_id" src="{{(column.usuario_color == 'white')? '../assets/img/white.png' : '../assets/img/black.png'}}" alt="" style="width: 3em">
             </td>
         </tr>
     </table>
 </div>
+
 <section class="section-player">
-    <div class="btn-game">
-        <button (click)="restartGame()">Empezar el juego</button>
-        <button (click)="updateTable()">Actualizar el juego</button>
-    </div>
     <table class="table-player">
         <tr>
             <th>Id</th>
@@ -45,3 +43,8 @@
         </tr>
     </table>
 </section>
+
+<div class="btn-game">
+        <button (click)="startGame()">Empezar el juego</button>
+        <button (click)="updateTable()">Actualizar el juego</button>
+    </div>
