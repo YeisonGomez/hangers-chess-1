@@ -1,10 +1,14 @@
+.gameview {
+    text-align: center;
+}
+
 table,
 th,
 td {
     /*border: 1px solid black;
     border-collapse: collapse;*/
-    text-align: center;
     table-layout: fixed;
+    margin: auto;
     word-wrap: break-word;
 }
 
@@ -19,6 +23,7 @@ td {
 .table-game td {
     /* background-image: url('../assets/img/miniskull.png'); */
     background-repeat: no-repeat;
+    transition: 5s ease;
 }
 
 .table-game tr:nth-child(odd) td:nth-child(even),
@@ -39,32 +44,83 @@ td {
 .table-game {
     display: inline-block;
     box-sizing: border-box;
-    margin: auto 5em;
+    /*margin: auto 5em;*/
+    width: 100%;
 }
 
 .table-game td,
 th {
-    width: 3em;
-    height: 3em;
+    width: 8em;
+    height: 6em;
+}
+
+@media (max-width: 1440px) {
+    .table-game td,
+    th {
+        width: 4em!important;
+        height: 3em!important;
+    }
+    .btn-game button {
+        padding: .5em!important;
+    }
+    .door {
+        margin-top: 4%!important;
+    }
+}
+
+
+/*Botones*/
+
+.btn-game {
+    margin: 1em auto;
+}
+
+.btn-game button {
+    padding: 1em;
+}
+
+
+/* Splash */
+
+.splash {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    text-align: center;
+    background-image: url("https://fahadalmuraikhiblog.files.wordpress.com/2017/04/safety-background.jpg");
+    /*background-image: url("http://trunkweed.com/uploads/posts/images/15203-war.jpg");*/
+}
+
+.door {
+    position: relative;
+    width: 70%;
+    height: 80%;
+    margin: 10% 15%;
+    background-image: url("/assets/img/splash.jpg");
+    background-size: cover;
+    border: inset 2px darkgray;
+}
+
+.pass {
+    position: absolute;
+    top: 40%;
+    left: 40%;
+    width: 20em;
+    height: 15em;
+    background: transparent;
+    border: none;
 }
 
 
 /*Sección Player*/
 
 .section-player {
-    width: 30%;
+    width: 35%;
     display: inline-block;
     vertical-align: top;
     text-align: center;
-    margin: auto 3em;
-}
-
-.btn-game {
-    margin: 1em auto 2em;
-}
-
-.btn-game button {
-    padding: 1em;
+    /*margin: auto 3em;*/
 }
 
 .table-player {
@@ -92,4 +148,33 @@ th {
 
 .table-player th:nth-child(2) {
     width: 7em;
+}
+
+
+/* Animaciones*/
+
+.slide-top {
+    animation: slide-top 2s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+
+@keyframes slide-top {
+    0% {
+        transform: translateY(0);
+    }
+    100% {
+        transform: translateY(-110%);
+    }
+}
+
+.slide-left {
+    animation: slide-left 4s cubic-bezier(0.250, 0.460, 0.450, 0.940) 1s both;
+}
+
+@keyframes slide-left {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-110%);
+    }
 }

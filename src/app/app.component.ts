@@ -14,6 +14,9 @@ export class AppComponent {
   public users;
   public letters;
 
+  private startGameCls = false;
+  private initGameCls = false;
+
   constructor(private boxService: BoxService){
     this.letters = this.boxService.letters;
     this.boxs = this.boxService.getTable(10);
@@ -31,6 +34,9 @@ export class AppComponent {
   }
 
   private restartGame(){
+    this.startGameCls = true;
+    this.initGameCls = true;
+
     this.boxService.startGame()
     .subscribe(data => {
       this.boxs = this.boxService.getTable(10);
