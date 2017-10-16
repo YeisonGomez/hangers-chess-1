@@ -14,15 +14,10 @@ export class AppComponent {
   public users;
   public letters;
 
-<<<<<<< HEAD
-  // private startGameCls = false;
-  private initGameCls = false;
-  private deadCls = false;
-=======
-  private startGameCls = true;
+  //private startGameCls = true;
   private initGameCls = true;
   private playGo = false;
->>>>>>> a6fb122d7508e738529314c1054053293a3694b9
+  private deadCls = false;
 
   constructor(private boxService: BoxService){
     this.letters = this.boxService.letters;

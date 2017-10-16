@@ -25,16 +25,16 @@
                 <!--<td *ngFor="let column of row">{{column.usuario_id}}</td>-->
                 <td *ngFor="let column of row">
                     <section [hidden]="column.usuario_vida == 5">
-                        <span style="color: red">{{column.name}} {{column.usuario_vida}}</span>
+                        <!--  <span style="color: red">{{column.name}} {{column.usuario_vida}}</span>-->
                         <img *ngIf="column.usuario_id" src="../assets/img/avatars/{{column.usuario_id}}.png" alt="" class="pj-move" [ngClass]="{'pj-dead': deadCls}" style="width: 3em">
-                        <img *ngIf="!column.usuario_id" src="../assets/img/blood.png" alt="sangre" style="width:3em;">
+                        <!--<img *ngIf="column.usuario_id" src="../assets/img/blood.png" alt="sangre" style="width:3em;">-->
                     </section>
                 </td>
             </tr>
         </table>
     </div>
     <section class="section-player">
-        <!--<table class="table-player">
+        <table class="table-player">
             <tr>
                 <th>Id</th>
                 <th>Nombre</th>
@@ -50,7 +50,7 @@
                 <td>{{user.usuario_vida}}</td>
                 <td>{{user.muertes}}</td>
             </tr>
-        </table>-->
+        </table>
     </section>
 </section>
 

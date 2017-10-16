@@ -4,16 +4,10 @@ import { Http, Headers } from '@angular/http';
 @Injectable()
 export class ApiService {
 
-<<<<<<< HEAD
 // public api_url: string = 'http://localhost:3310';
 // public api_url: string = 'https://9.ngrok.io';
 //public api_url: string = 'http://104.236.211.90:8080';
 public api_url: string = 'http://192.168.1.5:5000';
-=======
-	public api_url: string = 'http://localhost:5000';
-  //public api_url: string = 'https://97fb4890.ngrok.io';
-  //public api_url: string = 'http://104.236.211.90:8080';
->>>>>>> a6fb122d7508e738529314c1054053293a3694b9
 
 	private timeout: number = 5000;
 
