@@ -14,8 +14,9 @@ export class AppComponent {
   public users;
   public letters;
 
-  private startGameCls = false;
+  // private startGameCls = false;
   private initGameCls = false;
+  private deadCls = false;
 
   constructor(private boxService: BoxService){
     this.letters = this.boxService.letters;
@@ -34,7 +35,7 @@ export class AppComponent {
   }
 
   private restartGame(){
-    this.startGameCls = true;
+    //this.startGameCls = true;
     this.initGameCls = true;
 
     this.boxService.startGame()
@@ -79,6 +80,17 @@ export class AppComponent {
           this.boxs[i][l].usuario_vida = users[user_exist].usuario_vida;
         }
       }
+    }
+  }
+
+  /*Borrar*/ 
+  private pjTest(type){
+    if (type == "dead") {
+      this.deadCls = true;
+    }
+    if (type=="move") {
+      this.boxs[2][1].casilla == "c3";
+      console.log(this.boxs[2][1]);
     }
   }
 }

@@ -2,6 +2,7 @@
     <div class="btn-game">
         <button (click)="restartGame()">Empezar el juego</button>
         <button (click)="updateTable()">Actualizar el juego</button>
+        <button (click)="pjTest('move')">Probar</button>
     </div>
     <div class="table-game">
         <table>
@@ -22,7 +23,8 @@
                 <td>{{letters[i]}}</td>
                 <!--<td *ngFor="let column of row">{{column.usuario_id}}</td>-->
                 <td *ngFor="let column of row">
-                    <img *ngIf="column.usuario_id" src="../assets/img/avatars/{{column.usuario_id}}.png" alt="" style="width: 3em">
+                    <img *ngIf="column.usuario_id" src="../assets/img/avatars/{{column.usuario_id}}.png" alt="" class="pj-move" [ngClass]="{'pj-dead': deadCls}" style="width: 3em">
+                    <img *ngIf="!column.usuario_id" src="../assets/img/blood.png" alt="sangre" style="width:3em;">
                 </td>
             </tr>
         </table>

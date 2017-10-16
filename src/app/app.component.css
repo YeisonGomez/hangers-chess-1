@@ -178,3 +178,22 @@ th {
         transform: translateX(-110%);
     }
 }
+
+.pj-dead {
+    animation: swirl-out-bck 1s ease-in both;
+}
+
+@keyframes swirl-out-bck {
+    0% {
+        transform: rotate(0) scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: rotate(-540deg) scale(0);
+        opacity: 0;
+    }
+}
+
+.pj-move {
+    transition: all 2s;
+}
