@@ -9,9 +9,13 @@ export class BoxService {
 
 	constructor(public api: ApiService) {}
 
-	getAll(){
+	  getAll(){
     	return this.api.POST('/box/table/get-table-private', `key=${this.code_private}`);
   	}
+
+    getScoreTable(){
+      return this.api.GET('/box/score');
+    }
 
   	updateTable(){
     	return this.api.POST('/box/update-table', `key=${this.code_private}`);
