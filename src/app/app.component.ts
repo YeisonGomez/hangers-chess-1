@@ -13,13 +13,16 @@ export class AppComponent {
   public turno;
   public users;
   public letters;
+  public tableScore = window.location.search.indexOf("view") != -1;
 
-  //private startGameCls = true;
   private initGameCls = true;
   private playGo = false;
   private deadCls = false;
 
   constructor(private boxService: BoxService){
+    if(this.tableScore){
+      this.getScoreTable();
+    }
     this.letters = this.boxService.letters;
     this.boxs = this.boxService.getTable(10);
     this.getBoxsAll();
@@ -39,14 +42,8 @@ export class AppComponent {
   public getBoxsAll(){
   	this.boxService.getAll()
   	.subscribe(data => {
-      this.users = data.json().tablero;
-      for (let i = 0; i < this.users.length; ++i) {
-        this.users[i].name = this.users[i].usuario_nombres.split(' ')[2];
-      }
-  		this.boxs = this.boxService.addingUsersToTable(this.users, this.boxs);
+  		this.boxs = this.boxService.addingUsersToTable(data.json().tablero, this.boxs);
       this.turno = data.json().turno;
-
-      
       console.log(this.boxs);
   	});
   }
@@ -59,6 +56,7 @@ export class AppComponent {
       this.boxs = this.boxService.getTable(10);
       this.playGo = true;
       this.getBoxsAll(); 
+      this.getScoreTable();
     });
   }
 
@@ -68,6 +66,17 @@ export class AppComponent {
       this.users = data.json().tablero;
       this.updateBoxsSecuencie(data.json().tablero);
       this.turno = data.json().turno;
+    });
+  }
+
+  private async getScoreTable(){
+    await this.boxService.getScoreTable()
+    .subscribe(data => {
+      let turno = data.json().turno;
+      if(turno > 0){
+        this.users = data.json().tablero;
+        this.getScoreTable();
+      }
     });
   }
 
