@@ -5,52 +5,54 @@
         <button (click)="updateTable()">Actualizar el juego</button>
         <button (click)="pjTest('move')">Probar</button>
     </div>
-    <div class="table-game">
-        <table>
-            <tr>
-                <th></th>
-                <th>1</th>
-                <th>2</th>
-                <th>3</th>
-                <th>4</th>
-                <th>5</th>
-                <th>6</th>
-                <th>7</th>
-                <th>8</th>
-                <th>9</th>
-                <th>10</th>
-            </tr>
-            <tr *ngFor="let row of boxs; let i = index">
-                <td>{{letters[i]}}</td>
-                <!--<td *ngFor="let column of row">{{column.usuario_id}}</td>-->
-                <td *ngFor="let column of row">
-                    <section [hidden]="column.usuario_vida == 5">
-                        <!--  <span style="color: red">{{column.name}} {{column.usuario_vida}}</span>-->
-                        <img *ngIf="column.usuario_id" src="../assets/img/avatars/{{column.usuario_id}}.png" alt="" class="pj-move" [ngClass]="{'pj-dead': deadCls}" style="width: 3em">
-                        <!--<img *ngIf="column.usuario_id" src="../assets/img/blood.png" alt="sangre" style="width:3em;">-->
-                    </section>
-                </td>
-            </tr>
-        </table>
-    </div>
-    <section class="section-player">
-        <table class="table-player">
-            <tr>
-                <th>Id</th>
-                <th>Nombre</th>
-                <th>Color</th>
-                <th>Vida</th>
-                <th>Muertes</th>
-            </tr>
+    <section class="game-content">
 
-            <tr *ngFor="let user of users">
-                <td>{{user.usuario_id}}</td>
-                <td>{{user.usuario_nombres}}</td>
-                <td>{{user.usuario_color}}</td>
-                <td>{{user.usuario_vida}}</td>
-                <td>{{user.muertes}}</td>
-            </tr>
-        </table>
+        <div class="table-game">
+            <table>
+                <tr>
+                    <th></th>
+                    <th>1</th>
+                    <th>2</th>
+                    <th>3</th>
+                    <th>4</th>
+                    <th>5</th>
+                    <th>6</th>
+                    <th>7</th>
+                    <th>8</th>
+                    <th>9</th>
+                    <th>10</th>
+                </tr>
+                <tr *ngFor="let row of boxs; let i = index">
+                    <td>{{letters[i]}}</td>
+                    <!--<td *ngFor="let column of row">{{column.usuario_id}}</td>-->
+                    <td *ngFor="let column of row">
+                        <section [hidden]="column.usuario_vida == 5">
+                            <!--  <span style="color: red">{{column.name}} {{column.usuario_vida}}</span>-->
+                            <img *ngIf="column.usuario_id" src="../assets/img/avatars/{{column.usuario_id}}.png" alt="" class="pj-move" [ngClass]="{'pj-dead': deadCls}" style="width: 3em">
+                            <!--<img *ngIf="column.usuario_id" src="../assets/img/blood.png" alt="sangre" style="width:3em;">-->
+                        </section>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <section class="section-player">
+            <table class="table-player">
+                <tr>
+                    <th>Avatar</th>
+                    <th>Nombre</th>
+                    <th>Vida</th>
+                    <th>Muertes</th>
+                </tr>
+
+                <tr *ngFor="let user of users" class="{{user.usuario_color}}">
+                    <td> <img src="../assets/img/avatars/{{user.usuario_id}}.png" alt="" style="width: 2em">
+                    </td>
+                    <td>{{user.usuario_nombres}}</td>
+                    <td>{{user.usuario_vida}}</td>
+                    <td>{{user.muertes}}</td>
+                </tr>
+            </table>
+        </section>
     </section>
 </section>
 
@@ -58,5 +60,19 @@
     <div class="door">
         <!-- <img class="door " src="./assets/img/splash.jpg " alt=" ">-->
         <button class="pass " (click)="startGame() "></button>
+    </div>
+</div>
+
+<div class="modal-winner-content">
+    <div class="modal-winner">
+        <img id="avatar" src="../assets/img/avatars/58023.png" alt="">
+        <h1>Brigitte</h1>
+        <div class="victims">
+            <h2>Víctimas</h2>
+            <img src="../assets/img/avatars/58023.png" alt="">
+            <img src="../assets/img/avatars/58023.png" alt="">
+            <img src="../assets/img/avatars/58023.png" alt="">
+        </div>
+        <button>Seguir jugando</button>
     </div>
 </div>
