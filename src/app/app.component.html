@@ -7,7 +7,7 @@
     </div>
     <section class="game-content">
 
-        <div class="table-game">
+        <div class="table-game" *ngIf="!tableScore">
             <table>
                 <tr>
                     <th></th>
@@ -35,7 +35,7 @@
                 </tr>
             </table>
         </div>
-        <section class="section-player">
+        <section class="section-player" *ngIf="tableScore">
             <table class="table-player">
                 <tr>
                     <th>Avatar</th>
@@ -44,12 +44,14 @@
                     <th>Muertes</th>
                 </tr>
 
-                <tr *ngFor="let user of users" class="{{user.usuario_color}}">
-                    <td> <img src="../assets/img/avatars/{{user.usuario_id}}.png" alt="" style="width: 2em">
+                <tr *ngFor="let user of users" class="{{(user.team == 0)? 'white' : 'black'}}">
+                    <td> <img src="../assets/img/avatars/{{user.id}}.png" alt="" style="width: 2em">
                     </td>
                     <td>{{user.usuario_nombres}}</td>
-                    <td>{{user.usuario_vida}}</td>
-                    <td>{{user.muertes}}</td>
+                    <td>{{user.usuario_vidas}}</td>
+                    <td *ngFor="let id of (user.muertes)? user.muertes.split(',') : []">
+                        <img src="../assets/img/avatars/{{id}}.png" alt="" style="width: 2em">
+                    </td>
                 </tr>
             </table>
         </section>

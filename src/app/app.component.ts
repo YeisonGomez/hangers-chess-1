@@ -56,7 +56,6 @@ export class AppComponent {
       this.boxs = this.boxService.getTable(10);
       this.playGo = true;
       this.getBoxsAll(); 
-      this.getScoreTable();
     });
   }
 
@@ -73,10 +72,9 @@ export class AppComponent {
     await this.boxService.getScoreTable()
     .subscribe(data => {
       let turno = data.json().turno;
-      if(turno > 0){
         this.users = data.json().tablero;
+        console.log(this.users);
         this.getScoreTable();
-      }
     });
   }
 

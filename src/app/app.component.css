@@ -211,6 +211,7 @@ th {
 }
 
 .modal-winner-content {
+    display: none;
     position: absolute;
     background: rgba(0, 0, 0, .9);
     width: 100%;
