@@ -14,14 +14,9 @@ export class AppComponent {
   public users;
   public letters;
 
-<<<<<<< HEAD
   // private startGameCls = false;
   private initGameCls = false;
   private deadCls = false;
-=======
-  private startGameCls = true;
-  private initGameCls = true;
->>>>>>> 6935f71ee975cef3a7ac6b58aed563964aa4aba2
 
   constructor(private boxService: BoxService){
     this.letters = this.boxService.letters;
@@ -49,7 +44,7 @@ export class AppComponent {
   	});
   }
 
-  private restartGame(){
+  private startGame(){
     //this.startGameCls = true;
     this.initGameCls = true;
     this.boxService.startGame()
@@ -97,7 +92,7 @@ export class AppComponent {
     }
   }
 
-  /*Borrar*/ 
+  /*Borrar*/
   private pjTest(type){
     if (type == "dead") {
       this.deadCls = true;
