@@ -71,10 +71,15 @@ export class AppComponent {
   private async getScoreTable(){
     await this.boxService.getScoreTable()
     .subscribe(data => {
-      let turno = data.json().turno;
-        this.users = data.json().tablero;
-        console.log(this.users);
-        this.getScoreTable();
+        let turno = data.json().turno;
+        if(turno >= 0){
+          this.users = data.json().tablero;
+          this.getScoreTable();
+        } else {
+          setTimeout(() => {
+            this.getScoreTable();
+          }, 1000);
+        }
     });
   }
 

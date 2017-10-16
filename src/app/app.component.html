@@ -1,5 +1,5 @@
 <section class="gameview">
-    <div class="btn-game">
+    <div class="btn-game" *ngIf="!tableScore">
         <button (click)="startGame()">Iniciar jugadores</button>
         <button (click)="goGame()">Empezar el juego</button>
         <button (click)="updateTable()">Actualizar el juego</button>
@@ -49,8 +49,8 @@
                     </td>
                     <td>{{user.usuario_nombres}}</td>
                     <td>{{user.usuario_vidas}}</td>
-                    <td *ngFor="let id of (user.muertes)? user.muertes.split(',') : []">
-                        <img src="../assets/img/avatars/{{id}}.png" alt="" style="width: 2em">
+                    <td>
+                        <img *ngFor="let id of (user.muertes)? user.muertes.split(',') : []" src="../assets/img/avatars/{{id}}.png" alt="" style="width: 2em">
                     </td>
                 </tr>
             </table>
