@@ -16,44 +16,52 @@ export class AppComponent {
 
   private startGameCls = true;
   private initGameCls = true;
+  private playGo = false;
 
   constructor(private boxService: BoxService){
     this.letters = this.boxService.letters;
     this.boxs = this.boxService.getTable(10);
-  	this.getBoxsAll(true);
+    this.getBoxsAll();
   }
 
-  private getBoxsAll(first: boolean){
+  public goGame(){
+    let interval = setInterval(() => {
+      console.log(this.turno);
+      if(this.turno >= 0){
+        this.updateTable();
+        } else {
+          clearInterval(interval);
+        }
+      }, 3000);
+  }
+
+  public getBoxsAll(){
   	this.boxService.getAll()
   	.subscribe(data => {
       this.users = data.json().tablero;
+      for (let i = 0; i < this.users.length; ++i) {
+        this.users[i].name = this.users[i].usuario_nombres.split(' ')[2];
+      }
   		this.boxs = this.boxService.addingUsersToTable(this.users, this.boxs);
       this.turno = data.json().turno;
-      if(!first){
-        let interval = setInterval(() => {
-          console.log(this.turno);
-        if(this.turno >= 0){
-          this.updateTable();
-          } else {
-            clearInterval(interval);
-          }
-        }, 3000);
-      }
+
+      
       console.log(this.boxs);
   	});
   }
 
-  private startGame(){
+  public startGame(){
     this.startGameCls = true;
     this.initGameCls = true;
     this.boxService.startGame()
     .subscribe(data => {
       this.boxs = this.boxService.getTable(10);
-      this.getBoxsAll(false);
+      this.playGo = true;
+      this.getBoxsAll(); 
     });
   }
 
-  private updateTable(){
+  public updateTable(){
     this.boxService.updateTable()
     .subscribe(data => {
       this.users = data.json().tablero;
@@ -79,6 +87,8 @@ export class AppComponent {
           delete this.boxs[i][l].usuario_id;
           delete this.boxs[i][l].usuario_nombres;
           delete this.boxs[i][l].usuario_vida;
+          delete this.boxs[i][l].name;
+
         } else {
           this.boxs[i][l].muertes = users[user_exist].muertes;
           this.boxs[i][l].usuario_color = users[user_exist].usuario_color;
@@ -86,6 +96,7 @@ export class AppComponent {
           this.boxs[i][l].usuario_id = users[user_exist].usuario_id;
           this.boxs[i][l].usuario_nombres = users[user_exist].usuario_nombres;
           this.boxs[i][l].usuario_vida = users[user_exist].usuario_vida;
+          this.boxs[i][l].name = users[user_exist].usuario_nombres.split(' ')[2];
         }
       }
     }
