@@ -3,8 +3,6 @@
         <button (click)="startGame()">Iniciar jugadores</button>
         <button [disabled]="clickPressed" (click)="goGame()">Empezar el juego</button>
         <button [disabled]="clickPressed" (click)="updateTable()">Actualizar el juego</button>
-        <button (click)="pjTest('dead')">Probar</button>
-        <button (click)="pjTest('modal')">show</button>
     </div>
     <section class="game-content">
 
@@ -25,12 +23,10 @@
                 </tr>
                 <tr *ngFor="let row of boxs; let i = index">
                     <td>{{letters[i]}}</td>
-                    <!--<td *ngFor="let column of row">{{column.usuario_id}}</td>-->
                     <td *ngFor="let column of row">
                         <section [hidden]="column.usuario_vida == 5">
-                            <!-- *ngIf="deadBoard.indexOf(column.casilla) != -1" <span style="color: red">{{column.name}} {{column.usuario_vida}}</span>-->
                             <img *ngIf="column.usuario_id" src="../assets/img/avatars/{{column.usuario_id}}.png" class="img-avatar" style="width: 3em;">
-                            <img *ngIf="!column.usuario_id && deadBoard.indexOf(column.casilla) != -1" src="../assets/img/blood.png" alt="sangre" class="img-blood" style="width:3em;">
+                            <img [hidden]="column.usuario_id || deadBoard.indexOf(column.casilla) == -1" src="../assets/img/blood.png" alt="sangre" class="img-blood" style="width:3em;">
                         </section>
                     </td>
                 </tr>
@@ -45,7 +41,7 @@
                     <th>Muertes</th>
                 </tr>
 
-                <tr *ngFor="let user of users" class="{{(user.team == 0)? 'white' : 'black'}}" class="{'table-dead': (user.usuario_vidas == 0)}">
+                <tr *ngFor="let user of users" class="{{(user.team == 0)? 'white' : 'black'}} {{(user.estado == 0 || user.usuario_vidas == 5)? 'table-dead' : ''}}" >
                     <td> <img src="../assets/img/avatars/{{user.id}}.png" alt="" style="width: 2em">
                     </td>
                     <td>{{user.usuario_nombres}}</td>
@@ -68,15 +64,11 @@
 
 <div class="modal-winner-content" [ngStyle]="{ 'display': displayModalWinner}">
     <div class="modal-winner">
-        <h1>Ganador</h1>
-        <img id="avatar" src="../assets/img/avatars/58023.png" alt="">
-        <h2>Brigitte pedazo de caca</h2>
-        <div class="victims">
-            <h3>Víctimas</h3>
-            <img src="../assets/img/avatars/58023.png" alt="">
-            <img src="../assets/img/avatars/58023.png" alt="">
-            <img src="../assets/img/avatars/58023.png" alt="">
-        </div>
-        <button>Seguir jugando</button>
+        <h1>{{ (userWinner)? 'Ganador' : 'Todos murieron =D' }}</h1>
+        <section *ngIf="userWinner">
+            <img id="avatar" src="../assets/img/avatars/{{userWinner.usuario_id}}.png" alt="">
+            <h2>{{ userWinner.usuario_nombres }}</h2>
+        </section>
+        <button (click)="startGame()">Seguir jugando</button>
     </div>
 </div>

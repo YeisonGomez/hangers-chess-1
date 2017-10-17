@@ -16,6 +16,7 @@ export class AppComponent {
   public tableScore = window.location.search.indexOf("view") != -1;
   public clickPressed = false;
   public deadBoard = [];
+  public userWinner;
 
   private initGameCls = true;
   private playGo = false;
@@ -39,10 +40,10 @@ export class AppComponent {
         console.log(this.turno);
         if(this.turno >= 0){
           this.updateTable();
-          } else {
-            clearInterval(interval);
-            this.clickPressed = false;
-          }
+        } else {
+          clearInterval(interval);
+          this.clickPressed = false;
+        }
         }, 3000);
     }
   }
@@ -52,7 +53,6 @@ export class AppComponent {
   	.subscribe(data => {
   		this.boxs = this.boxService.addingUsersToTable(data.json().tablero, this.boxs);
       this.turno = data.json().turno;
-      console.log(this.boxs);
   	});
   }
 
@@ -64,13 +64,12 @@ export class AppComponent {
       this.boxs = this.boxService.getTable(10);
       this.deadBoard = [];
       this.playGo = true;
+      this.displayModalWinner = "none";
       this.getBoxsAll(); 
     });
   }
 
   public updateTable(){
-    if(!this.clickPressed){
-      this.clickPressed = true;
       this.boxService.updateTable()
       .subscribe(data => {
         if(this.users){
@@ -79,12 +78,11 @@ export class AppComponent {
         this.users = data.json().tablero;
         this.updateBoxsSecuencie(data.json().tablero);
         this.turno = data.json().turno;
-        setTimeout(() => {
-          this.clickPressed = false;
-        }, 3000);
+        if(this.turno == -1){
+          this.userWinner = this.users.find((user) => { return user.usuario_estado == "2" });
+          this.displayModalWinner = "block";
+        }
       });
-
-    }
   }
 
   private async getScoreTable(){
@@ -94,7 +92,8 @@ export class AppComponent {
         if(turno >= 0){
           this.users = data.json().tablero;
           this.getScoreTable();
-        } else {
+        } else {  
+          this.users = data.json().tablero;
           setTimeout(() => {
             this.getScoreTable();
           }, 1000);
@@ -121,7 +120,6 @@ export class AppComponent {
           delete this.boxs[i][l].usuario_vida;
           delete this.boxs[i][l].name;
         } else {
-          this.boxs[i][l].classDead = false;
           this.boxs[i][l].muertes = users[user_exist].muertes;
           this.boxs[i][l].usuario_color = users[user_exist].usuario_color;
           this.boxs[i][l].usuario_estado = users[user_exist].usuario_estado;
@@ -135,26 +133,14 @@ export class AppComponent {
   }
 
   private validUserDead(new_users){
-    console.log(this.users);
-    console.log(new_users);
     for (let i = 0; i < this.users.length; ++i) {
       for (let j = 0; j < new_users.length; ++j) {
-        if(this.users[i].usuario_id == new_users[j].usuario_id && new_users[j].usuario_estado == "0"){
+        if(this.users[i].usuario_id == new_users[j].usuario_id && (new_users[j].usuario_estado == "0" || new_users[j].usuario_vida == 5) ){
           this.deadBoard.push(this.users[i].casilla);
           break;
         }
       }
     }
     console.log(this.deadBoard);
-  }
-
-  /*Borrar*/
-  private pjTest(type){
-    if (type == "dead") {
-      this.deadCls = true;
-    }
-    if(type == "modal"){
-      this.displayModalWinner = "block";
-    }
   }
 }
