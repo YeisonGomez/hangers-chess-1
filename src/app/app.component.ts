@@ -19,6 +19,8 @@ export class AppComponent {
   private initGameCls = true;
   private playGo = false;
   private deadCls = false;
+  private displayModalWinner = "none";
+  /*private displayModalWinner = "block";*/
 
   constructor(private boxService: BoxService){
     if(this.tableScore){
@@ -83,10 +85,15 @@ export class AppComponent {
   private async getScoreTable(){
     await this.boxService.getScoreTable()
     .subscribe(data => {
-      let turno = data.json().turno;
-        this.users = data.json().tablero;
-        console.log(this.users);
-        this.getScoreTable();
+        let turno = data.json().turno;
+        if(turno >= 0){
+          this.users = data.json().tablero;
+          this.getScoreTable();
+        } else {
+          setTimeout(() => {
+            this.getScoreTable();
+          }, 1000);
+        }
     });
   }
 
@@ -127,9 +134,8 @@ export class AppComponent {
     if (type == "dead") {
       this.deadCls = true;
     }
-    if (type=="move") {
-      this.boxs[2][1].casilla == "c3";
-      console.log(this.boxs[2][1]);
+    if(type == "modal"){
+      this.displayModalWinner = "block";
     }
   }
 }

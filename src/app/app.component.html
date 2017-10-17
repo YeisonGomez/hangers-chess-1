@@ -1,9 +1,10 @@
 <section class="gameview">
-    <div class="btn-game">
+    <div class="btn-game" *ngIf="!tableScore">
         <button (click)="startGame()">Iniciar jugadores</button>
         <button [disabled]="clickPressed" (click)="goGame()">Empezar el juego</button>
         <button [disabled]="clickPressed" (click)="updateTable()">Actualizar el juego</button>
-        <button (click)="pjTest('move')">Probar</button>
+        <button (click)="pjTest('dead')">Probar</button>
+        <button (click)="pjTest('modal')">show</button>
     </div>
     <section class="game-content">
 
@@ -29,7 +30,7 @@
                         <section [hidden]="column.usuario_vida == 5">
                             <!--  <span style="color: red">{{column.name}} {{column.usuario_vida}}</span>-->
                             <img *ngIf="column.usuario_id" src="../assets/img/avatars/{{column.usuario_id}}.png" alt="" class="pj-move" [ngClass]="{'pj-dead': deadCls}" style="width: 3em">
-                            <!--<img *ngIf="column.usuario_id" src="../assets/img/blood.png" alt="sangre" style="width:3em;">-->
+                            <img *ngIf="!column.usuario_id" src="../assets/img/blood.png" alt="sangre" style="width:3em;">
                         </section>
                     </td>
                 </tr>
@@ -44,13 +45,13 @@
                     <th>Muertes</th>
                 </tr>
 
-                <tr *ngFor="let user of users" class="{{(user.team == 0)? 'white' : 'black'}}">
+                <tr *ngFor="let user of users" class="{{(user.team == 0)? 'white' : 'black'}}" class="{'table-dead': (user.usuario_vidas == 0)}">
                     <td> <img src="../assets/img/avatars/{{user.id}}.png" alt="" style="width: 2em">
                     </td>
                     <td>{{user.usuario_nombres}}</td>
                     <td>{{user.usuario_vidas}}</td>
-                    <td *ngFor="let id of (user.muertes)? user.muertes.split(',') : []">
-                        <img src="../assets/img/avatars/{{id}}.png" alt="" style="width: 2em">
+                    <td>
+                        <img *ngFor="let id of (user.muertes)? user.muertes.split(',') : []" src="../assets/img/avatars/{{id}}.png" alt="" style="width: 2em">
                     </td>
                 </tr>
             </table>
@@ -65,12 +66,13 @@
     </div>
 </div>
 
-<div class="modal-winner-content">
+<div class="modal-winner-content" [ngStyle]="{ 'display': displayModalWinner}">
     <div class="modal-winner">
+        <h1>Ganador</h1>
         <img id="avatar" src="../assets/img/avatars/58023.png" alt="">
-        <h1>Brigitte</h1>
+        <h2>Brigitte pedazo de caca</h2>
         <div class="victims">
-            <h2>Víctimas</h2>
+            <h3>Víctimas</h3>
             <img src="../assets/img/avatars/58023.png" alt="">
             <img src="../assets/img/avatars/58023.png" alt="">
             <img src="../assets/img/avatars/58023.png" alt="">
