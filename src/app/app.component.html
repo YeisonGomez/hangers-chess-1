@@ -1,8 +1,8 @@
 <section class="gameview">
     <div class="btn-game">
         <button (click)="startGame()">Iniciar jugadores</button>
-        <button (click)="goGame()">Empezar el juego</button>
-        <button (click)="updateTable()">Actualizar el juego</button>
+        <button [disabled]="clickPressed" (click)="goGame()">Empezar el juego</button>
+        <button [disabled]="clickPressed" (click)="updateTable()">Actualizar el juego</button>
         <button (click)="pjTest('move')">Probar</button>
     </div>
     <section class="game-content">

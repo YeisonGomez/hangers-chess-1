@@ -14,6 +14,7 @@ export class AppComponent {
   public users;
   public letters;
   public tableScore = window.location.search.indexOf("view") != -1;
+  public clickPressed = false;
 
   private initGameCls = true;
   private playGo = false;
@@ -29,14 +30,18 @@ export class AppComponent {
   }
 
   public goGame(){
-    let interval = setInterval(() => {
-      console.log(this.turno);
-      if(this.turno >= 0){
-        this.updateTable();
-        } else {
-          clearInterval(interval);
-        }
-      }, 3000);
+    if(!this.clickPressed){
+      this.clickPressed = true;
+      let interval = setInterval(() => {
+        console.log(this.turno);
+        if(this.turno >= 0){
+          this.updateTable();
+          } else {
+            clearInterval(interval);
+            this.clickPressed = false;
+          }
+        }, 3000);
+    }
   }
 
   public getBoxsAll(){
@@ -60,12 +65,19 @@ export class AppComponent {
   }
 
   public updateTable(){
-    this.boxService.updateTable()
-    .subscribe(data => {
-      this.users = data.json().tablero;
-      this.updateBoxsSecuencie(data.json().tablero);
-      this.turno = data.json().turno;
-    });
+    if(!this.clickPressed){
+      this.clickPressed = true;
+      this.boxService.updateTable()
+      .subscribe(data => {
+        this.users = data.json().tablero;
+        this.updateBoxsSecuencie(data.json().tablero);
+        this.turno = data.json().turno;
+        setTimeout(() => {
+          this.clickPressed = false;
+        }, 3000);
+      });
+
+    }
   }
 
   private async getScoreTable(){
