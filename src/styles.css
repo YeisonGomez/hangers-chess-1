@@ -1,8 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 
-@import url('https://fonts.googleapis.com/css?family=Raleway');
-@import url('https://fonts.googleapis.com/css?family=Nosifer');
-@import url('https://fonts.googleapis.com/css?family=Black+Ops+One');
+/*@import url('https://fonts.googleapis.com/css?family=Raleway');*/
+/*@import url('https://fonts.googleapis.com/css?family=Black+Ops+One');*/
 header {
     font-family: 'Black Ops One', cursive;
     height: 5em;
@@ -30,7 +29,7 @@ header h1 {
 
 body {
     font-family: 'Raleway', sans-serif;
-    background-image: url("https://cdn.wallpapersafari.com/29/49/PjQODh.jpg");
+    background-image: url("./assets/background.jpg");
     /*  background-image: url("https://wallpaperscraft.com/image/call_of_duty_square_houses_tanks_fire_battle_19754_3840x2160.jpg");
     background-size: cover;*/
     margin: 0;
