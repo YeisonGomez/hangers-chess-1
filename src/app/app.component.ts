@@ -15,6 +15,7 @@ export class AppComponent {
   public letters;
   public tableScore = window.location.search.indexOf("view") != -1;
   public clickPressed = false;
+  public deadBoard = [];
 
   private initGameCls = true;
   private playGo = false;
@@ -61,6 +62,7 @@ export class AppComponent {
     this.boxService.startGame()
     .subscribe(data => {
       this.boxs = this.boxService.getTable(10);
+      this.deadBoard = [];
       this.playGo = true;
       this.getBoxsAll(); 
     });
@@ -71,6 +73,9 @@ export class AppComponent {
       this.clickPressed = true;
       this.boxService.updateTable()
       .subscribe(data => {
+        if(this.users){
+          this.validUserDead(data.json().tablero);
+        }
         this.users = data.json().tablero;
         this.updateBoxsSecuencie(data.json().tablero);
         this.turno = data.json().turno;
@@ -115,8 +120,8 @@ export class AppComponent {
           delete this.boxs[i][l].usuario_nombres;
           delete this.boxs[i][l].usuario_vida;
           delete this.boxs[i][l].name;
-
         } else {
+          this.boxs[i][l].classDead = false;
           this.boxs[i][l].muertes = users[user_exist].muertes;
           this.boxs[i][l].usuario_color = users[user_exist].usuario_color;
           this.boxs[i][l].usuario_estado = users[user_exist].usuario_estado;
@@ -127,6 +132,20 @@ export class AppComponent {
         }
       }
     }
+  }
+
+  private validUserDead(new_users){
+    console.log(this.users);
+    console.log(new_users);
+    for (let i = 0; i < this.users.length; ++i) {
+      for (let j = 0; j < new_users.length; ++j) {
+        if(this.users[i].usuario_id == new_users[j].usuario_id && new_users[j].usuario_estado == "0"){
+          this.deadBoard.push(this.users[i].casilla);
+          break;
+        }
+      }
+    }
+    console.log(this.deadBoard);
   }
 
   /*Borrar*/
