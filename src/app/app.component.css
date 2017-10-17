@@ -14,7 +14,7 @@
 
 .game-content {
     display: grid;
-    grid-template-columns: 3fr 2fr;
+    /*grid-template-columns: 3fr 2fr;*/
 }
 
 table,
@@ -136,9 +136,11 @@ th {
 }
 
 .table-player {
-    width: 100%;
+    /*width: 100%;*/
     vertical-align: middle;
-    background: rgba(255, 255, 255, 0.5)
+    background: rgba(255, 255, 255, 0.5);
+    width: 60%;
+    margin-left: 20%;
 }
 
 .table-player,
@@ -206,20 +208,44 @@ th {
     }
 }
 
+.slide-in-elliptic-top-fwd {
+    animation: slide-in-elliptic-top-fwd 1s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+
+@keyframes slide-in-elliptic-top-fwd {
+    0% {
+        transform: translateY(-600px) rotateX(-30deg) scale(0);
+        transform-origin: 50% 100%;
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0) rotateX(0) scale(1);
+        transform-origin: 50% 1400px;
+        opacity: 1;
+    }
+}
+
 .pj-move {
     transition: all 2s;
 }
 
+.table-dead {
+    background: rgb(255, 0, 0, 0.8);
+}
+
 .modal-winner-content {
-    display: none;
+    font-family: 'Black Ops One', cursive;
     position: absolute;
-    background: rgba(0, 0, 0, .9);
+    display: none;
+    top: 0;
     width: 100%;
     height: 100%;
-    top: 0;
+    background: rgba(0, 0, 0, .9);
+    transition: all 10s;
 }
 
 .modal-winner {
+    animation: slide-in-elliptic-top-fwd 1s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
     width: 70%;
     height: 70%;
     margin: 0 auto;
@@ -230,29 +256,39 @@ th {
 }
 
 .modal-winner #avatar {
-    width: 13em;
-    margin-top: 5em;
+    width: 12em;
 }
 
 .modal-winner h1 {
     margin: 0;
+    padding-top: 3em!important;
     padding: 0;
     font-size: 3em;
 }
 
 .modal-winner h2 {
-    font-size: 2em;
+    font-size: 2.5em;
     margin: 0;
-    margin-top: 1.2em;
+    display: inline-block;
+    vertical-align: top;
+    padding-top: 1.5em;
+    width: 9em;
+    text-align: left;
+}
+
+.modal-winner h3 {
+    font-size: 2.5em;
+    margin: 0;
+    padding-top: .5em;
 }
 
 .modal-winner .victims img {
-    margin-top: 1.2em;
     width: 10em;
+    display: inline-block;
 }
 
 .modal-winner button {
-    margin-top: 1em;
+    margin-top: .3em;
     padding: .5em 2em;
     font-size: 1.5em;
 }

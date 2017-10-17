@@ -18,6 +18,8 @@ export class AppComponent {
   private initGameCls = true;
   private playGo = false;
   private deadCls = false;
+  private displayModalWinner = "none";
+  /*private displayModalWinner = "block";*/
 
   constructor(private boxService: BoxService){
     if(this.tableScore){
@@ -120,9 +122,8 @@ export class AppComponent {
     if (type == "dead") {
       this.deadCls = true;
     }
-    if (type=="move") {
-      this.boxs[2][1].casilla == "c3";
-      console.log(this.boxs[2][1]);
+    if(type == "modal"){
+      this.displayModalWinner = "block";
     }
   }
 }
