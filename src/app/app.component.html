@@ -26,7 +26,7 @@
                     <td *ngFor="let column of row">
                         <section [hidden]="column.usuario_vida == 5">
                             <img *ngIf="column.usuario_id" src="../assets/img/avatars/{{column.usuario_id}}.png" class="img-avatar" style="width: 3em;">
-                            <img [hidden]="column.usuario_id || deadBoard.indexOf(column.casilla) == -1" src="../assets/img/blood.png" alt="sangre" class="img-blood" style="width:3em;">
+                            <!--<img [hidden]="column.usuario_id || deadBoard.indexOf(column.casilla) == -1" src="../assets/img/blood.png" alt="sangre" class="img-blood" style="width:3em;">-->
                         </section>
                     </td>
                 </tr>

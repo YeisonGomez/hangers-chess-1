@@ -44,7 +44,7 @@ export class AppComponent {
           clearInterval(interval);
           this.clickPressed = false;
         }
-        }, 3000);
+        }, 5000);
     }
   }
 
